@@ -16,14 +16,14 @@ Adds words to the dictionary or updates its value if the word is already added
 
 ## Running instructions
 1. MacOS
-	a. Python
+	1. Python
 		- Python should be preinstalled on MacOs: a version of 3.5 or higher is required to be compatible with nltk. 3.9 or higher is recommended as this project was written using 3.9.1
-	b. pip: pip is needed to install nltk, if you don't have it already use the below commands to install pip3
+	2. pip: pip is needed to install nltk, if you don't have it already use the below commands to install pip3
 		- `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py`
 		- `python3 get-pip.py`
-	c. nltk: run the following command in terminal to install nltk
+	3. nltk: run the following command in terminal to install nltk
 		- `pip3 install --user -U nltk`
-	d. Run the code in terminal
+	4. Run the code in terminal
 		- use cd to navigate to the location of concordance.py (ensure input.txt is in the same location)
 		- run the file using `python3 concordance.py`
 2. Windows
