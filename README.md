@@ -3,7 +3,7 @@
 
 Interview exercise to create a concordance given an input text. The concordance denotes how many times and which sentences a word appeared in alphabetical order.
 
-Logic Overview
+**Logic Overview**
   1) Tokenize(): Extract the text from the source and split into sentences 
       This step is implemented using punkt from nltk, however punkt alone is not capable of recognizes abbreviations, ellipses results in false positives 
       of sentence ends. Thus a regex pattern is also required to recognize this specific cases. 
@@ -19,10 +19,10 @@ Logic Overview
 
 
 
-Installations
-		1) python
-			- a version of 3.5 or higher is required to be compatible with nltk. 3.9 or higher is recommended as this project was written using 3.9.1
-		2) nlkt
-			- nlkt requires python 3.5 or newer
-			- pip install --user -U nltk (for MAC/UNIX)  ...   https://www.nltk.org/install.html
-			- run the provided file nltk.py which will open a GUI window and download punkt under models, this needs to be down before running concordance.py
+**Installations**
+	1) python
+		- a version of 3.5 or higher is required to be compatible with nltk. 3.9 or higher is recommended as this project was written using 3.9.1
+	2) nlkt
+		- nlkt requires python 3.5 or newer
+		- pip install --user -U nltk (for MAC/UNIX)  ...   https://www.nltk.org/install.html
+		- run the provided file nltk.py which will open a GUI window and download punkt under models, this needs to be down before running concordance.py
