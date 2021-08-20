@@ -1,37 +1,5 @@
-'''
-	Logic Overview
 
-		1) Tokenize(): Extract the text from the source and split into sentences 
-			- This step is implemented using punkt from nltk, however punkt alone is not capable of recognizes abbreviations, ellipses results in false positives 
-			of sentence ends. Thus a regex pattern is also required to recognize this specific cases. 
-			
-		2) addWord(): Check each token and determine whether it should be added to the dictionary
-			- Checks to see if the word contains atleast one letter, this eliminates punctation such as commas, colons, etc.
-				- Time complexity is O(W) where W is word length
-			- Adds words to the dictionary or updates its value if the word is already added
-				- Time complexity is O(1)
-
-		3) Sort the dictionary and print with correct formatting 
-			- Technically the actual dictionary is not being sorted but the output is sorted through python's timsort algorithm which results in a 
-			time complexity of O(nlogn). Since iterating the dictionary is only O(n) the total time complexity of the print method remains O(nlogn)
-
-
-
-	Installations
-		1) python
-			- 
-		2) nlkt
-			- nlkt requires python 3.5 or newer
-			- pip install --user -U nltk (for MAC/UNIX)  ...   https://www.nltk.org/install.html
-			- run the provided file nltk.py which will open a GUI window and download punkt under models, this needs to be down before running concordance.py
-
-
-	Questions & Modifications
-		1) AM I USING PUNKT ANYMORE?
-'''
-
-
-import nltk
+import nltk	# used for tokenizing the text
 
 def addWord(newWord, sentenceNumber, myWords):	
 
@@ -56,9 +24,11 @@ def addWord(newWord, sentenceNumber, myWords):
 
 
 def tokenize(inputString):
-
-	# Create a regex pattern to look for situations that may seem like the end of a sentence but are not such as abbreviations. This also looks for
-	# situations that may cause an early split in hypenated words. For example, high-tech should be treated as a single word and not tokenized seperately	
+	'''
+	Create a regex pattern to look for situations that may seem like the end of a sentence but are not, such as abbreviations. As well as ensure that 
+	hypenated words remain together as one token: For example, high-tech should be treated as a single word and not tokenized seperately. The pattern 
+	also looks for other grammatical charcters and tokenizes them seperately as to not place them with words
+	'''	
 	regex = r'''(?x)         
 		(?:[A-Za-z]\.)+        # Looks for abbreviations such as i.e. or U.S.A. 
 		| \w+(?:-\w+)*         # Looks for words with hyphens within them
@@ -93,6 +63,7 @@ def printDictionary(d):
 			multiples += 1
 			index = 0
 
+# Used to read in the entire input of the file into a string (nltk requires a string to be tokenized)
 def readFile():
 	with open ("input.txt", "r") as myFile:
 		inputString = myFile.readlines()
@@ -102,7 +73,7 @@ def readFile():
 def main():
 
 	# This program supports reading from a txt file as well as a hard coded string. Feel free to test both methods. Simply uncomment the method you wish to use
-	# and leave the other one commented out. 
+	# and leave the other one commented out
 
 	inputString = """Given an arbitrary text document written in English, write a program that will generate a concordance, i.e. an alphabetical list of all word occurrences, labeled with word frequencies. Bonus: label each word with the sentence numbers in which each occurrence appeared.""" 
 	#inputString = readFile()
