@@ -1,14 +1,15 @@
 # Concordance
 
 
-Interview exercise to create a concordance given an input text. The concordance denotes how many times and which sentences a word appeared in alphabetical order.
+Interview exercise to create a concordance given an input text. The concordance denotes how many times and within which sentences a word appears in alphabetical order. For more information on the challenge prompt, please view the included file 'code challenge.pdf'
 
 ## Logic Overview
-1. **tokenize():** Extract the text from the source and split into sentences. This step is implemented using punkt from nltk, however punkt alone is not capable of recognizes abbreviations, ellipses results in false positives of sentence ends. Thus a regex pattern is also required to recognize this specific cases. 
-2. **addWord():** Check each token and determine whether it should be added to the dictionary. Checks to see if the word contains atleast one letter, this eliminates punctation such as commas, colons, etc. Adds words to the dictionary or updates its value if the word is already added
-	- Time complexity is O(W) where W is word length. This is due to iterating through each char to check for alphanumeric values
-3. **printDictionary()** Sort the dictionary and print with correct formatting. Technically the actual dictionary is not being sorted but the output is sorted through python's timsort algorithm 
-	- Sorting results in a Time complexity of O(nlogn). Since iterating the dictionary is only O(n) the total time complexity of the print method remains O(nlogn)
+1. Extract the text from the source and split into sentences. This step is implemented using nltk, however nltk alone is not capable of recognizing abbreviations or ellipses resulting in false positives of sentence ends. Thus a regex pattern is also required to recognize this specific cases. This pattern also seperates punction from words except for in the case of hyphenated words. Implemented with the method: **tokenize()**.
+	- Time complexity is O(n) where n is the size of the input text.
+3. Check each token and determine whether it should be added to the dictionary. Checks to see if the word contains atleast one letter, this eliminates punctation such as commas, colons, etc. Adds words to the dictionary or updates its value if the word is already added. Implemented with the method: **addWord()**.
+	- Time complexity is O(n) where n is word length. This is due to iterating through each char to check for alphanumeric values. However since no word should be bigger than even 40 chars, this could be argued as O(40) which equals O(1).
+4. Sort the dictionary and print with correct formatting. Technically the actual dictionary is not being sorted but the output is sorted through python's timsort algorithm. Implemented with the method: **printDictionary()**.
+	- Sorting results in a Time complexity of O(nlogn). Since iterating sorting with timsort is O(nlogn) and iterating through the dictionary is only O(n) the total time complexity of the print method remains O(nlogn).
 
 
 
@@ -36,3 +37,10 @@ Interview exercise to create a concordance given an input text. The concordance 
 	4. Run the code in powershell
 		- use cd to navigate to the location of concordance.py (ensure input.txt is in the same location)
 		- run the file using `python concordance.py`
+
+
+## Design Decisions
+1. Tokenizing
+	- nltk is one of python's most powerful tokenizer. It provides many different methods for tokenizing including the ability to use a custom regex pattern. This allows for my code to prevent false positive sentence ends as well as properly split up grammatical punctions such as commas and colons from words. nltk is also easier to use as opposed to something like punkt which involves downloading it on every run. 
+3. Storing Words
+	- I chose to store each word in a dictionary due to its low cost in adding new words as well as checking if a word already exists. The only drawback in a dictionary is that it is rather inefficient to maintain a sorted dictionary. However sorted it during the print still yields a time complexity of O(nlogn). Alternatively, storing the words in a sorted list or tuple would result in inefficiences upon entering new elements and checking if elements already exist. 
